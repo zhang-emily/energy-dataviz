@@ -19,13 +19,13 @@ fetch("data/choro_2019.csv")
 function ChoroMap(data) {
   var map = d3
     .choropleth()
-    .geofile("./data/states-10m.json")
+    .geofile("data/states-10m.json")
     .projection(d3.geoAlbersUsa)
     .unitId("fips")
     .scale(1000)
     .legend(true);
 
-  d3.csv("./data/choro_2019.csv").then((data) => {
+  d3.csv("data/choro_2019.csv").then((data) => {
     map.draw(d3.select("#choro-map").datum(data));
   });
 }

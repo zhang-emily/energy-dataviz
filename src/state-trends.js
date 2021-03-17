@@ -9,7 +9,7 @@ var height = 400 - margin.top - margin.bottom;
 
 //Read the data
 
-d3.csv("data/state_trends.csv").then(function(data) {
+d3.csv("/data/state_trends.csv").then(function(data) {
   // filter by one state
   var filtered = data.filter(function(row) {
     return row["STATE"] == "KS" && row["YEAR"] >= 2010;
