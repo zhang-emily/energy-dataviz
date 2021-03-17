@@ -1,52 +1,52 @@
-,STATE,Top_Source
-89,AK,Natural Gas
-278,AL,Natural Gas
-437,AR,Coal
-725,AZ,Natural Gas
-1026,CA,Natural Gas
-1339,CO,Coal
-1674,CT,Natural Gas
-1913,DC,Solar
-1997,DE,Natural Gas
-2173,FL,Natural Gas
-2460,GA,Natural Gas
-2729,HI,Oil
-3093,IA,Wind
-3144,ID,Hydro
-3378,IL,Nuclear
-3552,IN,Coal
-3961,KS,Wind
-3991,KY,Coal
-4254,LA,Natural Gas
-4472,MA,Natural Gas
-4820,MD,Nuclear
-4981,ME,Hydro
-5211,MI,Coal
-5546,MN,Coal
-5848,MO,Coal
-6170,MS,Natural Gas
-6317,MT,Coal
-6600,NC,Nuclear
-6824,ND,Coal
-7005,NE,Coal
-7340,NH,Nuclear
-7582,NJ,Natural Gas
-7812,NM,Coal
-8098,NV,Natural Gas
-8324,NY,Nuclear
-8619,OH,Natural Gas
-8876,OK,Natural Gas
-9070,OR,Hydro
-9352,PA,Natural Gas
-9660,RI,Natural Gas
-9888,SC,Nuclear
-10082,SD,Hydro
-10342,TN,Nuclear
-10578,TX,Natural Gas
-11216,UT,Coal
-11503,VA,Natural Gas
-11750,VT,Hydro
-12011,WA,Hydro
-12299,WI,Coal
-12593,WV,Coal
-12810,WY,Coal
+id,STATE,Top_Source
+02,AK,Natural Gas
+01,AL,Natural Gas
+05,AR,Coal
+04,AZ,Natural Gas
+06,CA,Natural Gas
+08,CO,Coal
+09,CT,Natural Gas
+11,DC,Solar
+10,DE,Natural Gas
+12,FL,Natural Gas
+13,GA,Natural Gas
+15,HI,Oil
+19,IA,Wind
+16,ID,Hydro
+17,IL,Nuclear
+18,IN,Coal
+20,KS,Wind
+21,KY,Coal
+22,LA,Natural Gas
+25,MA,Natural Gas
+24,MD,Nuclear
+23,ME,Hydro
+26,MI,Coal
+27,MN,Coal
+29,MO,Coal
+28,MS,Natural Gas
+30,MT,Coal
+37,NC,Nuclear
+38,ND,Coal
+31,NE,Coal
+33,NH,Nuclear
+34,NJ,Natural Gas
+35,NM,Coal
+32,NV,Natural Gas
+36,NY,Nuclear
+39,OH,Natural Gas
+40,OK,Natural Gas
+41,OR,Hydro
+42,PA,Natural Gas
+44,RI,Natural Gas
+45,SC,Nuclear
+46,SD,Hydro
+47,TN,Nuclear
+48,TX,Natural Gas
+49,UT,Coal
+51,VA,Natural Gas
+50,VT,Hydro
+53,WA,Hydro
+55,WI,Coal
+54,WV,Coal
+56,WY,Coal
