@@ -12,7 +12,7 @@ var height = 400 - margin.top - margin.bottom;
 d3.csv("data/state_trends.csv").then(function(data) {
   // filter by one state
   var filtered = data.filter(function(row) {
-    return row["STATE"] == "KS" && row["YEAR"] >= 2010;
+    return row["STATE"] == "OK" && row["YEAR"] >= 2010;
   });
   var svg = d3
     .select("#state-trend")
@@ -77,7 +77,7 @@ d3.csv("data/state_trends.csv").then(function(data) {
     .scaleOrdinal()
     .domain(sources)
     .range([
-      "#919191",
+      "#323232",
       "#634a4a",
       "#eb9534",
       "#f7eb45",

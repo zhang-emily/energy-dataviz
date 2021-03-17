@@ -17,7 +17,7 @@ var fills = {
 var i = 0;
 var len = sources.length;
 for (; i < len; i++) {
-  fetch(`./data/bubble/${sources[i]}_2019.json`)
+  fetch(`data/bubble/${sources[i]}_2019.json`)
     .then((response) => response.json())
     .then((data) => BubbleMap(data))
     .catch((e) => {
