@@ -1,9 +1,6 @@
 import * as d3 from "d3";
 import * as topojson from "topojson-client";
-import { select } from "d3-selection";
-// import { legend } from "@d3/color-legend";
-
-// import { states } from "https://unpkg.com/us-atlas@1/us/10m.json";
+// import { select } from "d3-selection";
 
 // -------- Choro map ---------- //
 
@@ -11,7 +8,6 @@ import { select } from "d3-selection";
 // d3 = require("d3@6");
 
 Promise.all([
-  // d3.json("https://unpkg.com/us-atlas@1/us/10m.json"),
   d3.json("data/states-10m.json"),
   d3.csv("data/choro_2019.csv"),
 ]).then((results) => {
