@@ -1,0 +1,23 @@
+a {
+  cursor: pointer;
+}
+
+html, body {
+  background: #d6d6ce;
+  font-family: Verdana, Geneva, sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.h1 {
+  font-size: 0.4em;
+  align-content: center;
+}
+
+#choro-map {
+  height: 600px;
+  width: 400px;
+  position: absolute;
+}
