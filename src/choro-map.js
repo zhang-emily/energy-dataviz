@@ -9,7 +9,7 @@ var margin = { top: 10, right: 30, bottom: 30, left: 60 },
   height = 400 - margin.top - margin.bottom;
 
 // // importing data
-fetch("./data/choro_2019.csv")
+fetch("data/choro_2019.csv")
   .then((x) => x.json())
   .then((data) => ChoroMap(data))
   .catch((e) => {
