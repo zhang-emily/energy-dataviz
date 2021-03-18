@@ -43,7 +43,7 @@ Promise.all([
 // Function to create maps
 function choroMap(us, data) {
   // console.log(us);
-  console.log(data);
+  // console.log(data);
 
   // Draw the map
   var path = d3.geoPath().projection(projection);
@@ -62,8 +62,17 @@ function choroMap(us, data) {
     .attr("fill", function(d, key) {
       // setting the fill
       console.log(data);
-      if (typeof data[d.id] !== "undefined") {
-        return color(data[d.id].Top_Source);
+      const thRow = data.find(function(x) {
+        return Number(x.id) === Number(d.id);
+      });
+      // if (!thRow) {
+      //   console.log("!!!", d);
+      // }
+      // console.log("?????", thRow);
+      // console.log(data[data.id == d.id]);
+      //   if (typeof data[d.id] !== "undefined") {
+      if (thRow) {
+        return color(thRow.Top_Source);
       }
     })
     .attr("d", d3.geoPath().projection(projection)) // draw each state
@@ -85,14 +94,17 @@ function choroMap(us, data) {
         .remove();
       if (typeof data[state.id] !== "undefined") {
         selected = data[state.id].STATE;
-        stateTrend(selected); // Calls the function... should in theory create the chart
+        stateTrend(selected); // Calls the function to create the chart
       }
       tooltip.html(
         "<h4>" +
           state.properties.name +
-          "</h4>" +
-          "<br><h5><strong>Predominant Energy Source: </strong>" +
-          data[state.id].Top_Source +
+          "</h4><br><h5>" +
+          "The primary energy source in " +
+          state.properties.name +
+          " is " +
+          //data[state.id].Top_Source +
+          "." +
           "</h5>"
       );
       d3.select(this)
