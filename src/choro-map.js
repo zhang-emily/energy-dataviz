@@ -41,26 +41,20 @@ d3.csv("data/choro_2019.csv").then(function(data) {
   // console.log(us);
   console.log(data);
 
-  var states = us.objects.states.geometries.map((d) => [d.id, d.properties]);
   var path = d3.geoPath().projection(projection);
 
   var svg = d3
     .select("#choro-map")
     .append("svg")
     .attr("viewBox", [0, 0, 975, 610]);
-  // .attr("width", width + margin.left + margin.right)
-  // .attr("height", height + margin.top + margin.bottom)
-  // .append("g");
-  // .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   svg
     .append("g")
     .selectAll("path")
     .data(topojson.feature(us, us.objects.states).features)
-    // .data(us)
     .join("path")
-    // .attr("fill", (d) => color(data[d.id])) // setting the fill
     .attr("fill", function(d, key) {
+      // setting the fill
       if (typeof data[d.id] !== "undefined") {
         return color(data[d.id].Top_Source);
       }
