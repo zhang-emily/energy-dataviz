@@ -1,4 +1,3 @@
 import "./state-trends";
-// import "./choro-map";
-import "./choro-map-2";
+import "./choro-map";
 // import "./bubble-map";
