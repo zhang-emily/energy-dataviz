@@ -61,16 +61,10 @@ function choroMap(us, data) {
     .attr("class", "state")
     .attr("fill", function(d, key) {
       // setting the fill
-      console.log(data);
+      // console.log(data);
       const thRow = data.find(function(x) {
         return Number(x.id) === Number(d.id);
       });
-      // if (!thRow) {
-      //   console.log("!!!", d);
-      // }
-      // console.log("?????", thRow);
-      // console.log(data[data.id == d.id]);
-      //   if (typeof data[d.id] !== "undefined") {
       if (thRow) {
         return color(thRow.Top_Source);
       }
@@ -88,25 +82,31 @@ function choroMap(us, data) {
     .selectAll(".state")
     .on("mouseover", function(d) {
       var state = d.target.__data__;
-      // console.log(data[state.id].STATE);
+      // console.log(state);
       d3.select("#state-trend")
         .selectAll("svg")
         .remove();
-      if (typeof data[state.id] !== "undefined") {
-        selected = data[state.id].STATE;
-        stateTrend(selected); // Calls the function to create the chart
+      const thRow = data.find(function(x) {
+        return Number(x.id) === Number(state.id);
+      });
+      console.log(thRow);
+      if (thRow) {
+        console.log(thRow.STATE);
+        selected = thRow.STATE;
+        stateTrend(selected);
+        tooltip.html(
+          "<h4>" +
+            state.properties.name +
+            "</h4><br><h5>" +
+            "The primary energy source in " +
+            state.properties.name +
+            " is " +
+            thRow.Top_Source +
+            "." +
+            "</h5>"
+        );
       }
-      tooltip.html(
-        "<h4>" +
-          state.properties.name +
-          "</h4><br><h5>" +
-          "The primary energy source in " +
-          state.properties.name +
-          " is " +
-          //data[state.id].Top_Source +
-          "." +
-          "</h5>"
-      );
+      /// --- Added code above
       d3.select(this)
         .attr("stroke", "red")
         .style("opacity", 1)
