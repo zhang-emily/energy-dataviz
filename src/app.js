@@ -110,9 +110,9 @@ function choroMap(us, data) {
 // Stacked line for state energy sources
 
 // set the dimensions and margins of the graph
-var margin = { top: 150, right: 30, bottom: 30, left: 60 };
+var margin = { top: 30, right: 30, bottom: 50, left: 60 };
 var width = 400 - margin.left - margin.right;
-var height = 400 - margin.top - margin.bottom;
+var height = 300 - margin.top - margin.bottom;
 
 //Read the data
 
@@ -145,7 +145,7 @@ function stateTrend(selected) {
         return !matchingThing ? 0 : matchingThing.PERCENT_GEN;
       })(sumstat);
 
-    // Add X axis --> it is a date format
+    // Add X axis - it is a date format
     var x = d3
       .scaleLinear()
       .domain([
@@ -158,7 +158,22 @@ function stateTrend(selected) {
     svg
       .append("g")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x).ticks(5));
+      .call(
+        d3
+          .axisBottom(x)
+          .ticks(10)
+          .tickFormat(d3.format("d"))
+      );
+
+    // text label for the x axis - source: https://bl.ocks.org/d3noob/23e42c8f67210ac6c678db2cd07a747e
+    svg
+      .append("text")
+      .attr(
+        "transform",
+        "translate(" + width / 2 + " ," + (height + margin.top + 20) + ")"
+      )
+      .style("text-anchor", "middle")
+      .text("Year");
 
     // Add Y axis
     var y = d3
@@ -171,7 +186,17 @@ function stateTrend(selected) {
       ])
       .range([height, 0]);
 
-    svg.append("g").call(d3.axisLeft(y));
+    // text label for the y axis
+    svg
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left)
+      .attr("x", 0 - height / 2)
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Percent Generation");
+
+    svg.append("g").call(d3.axisLeft(y).tickFormat(d3.format(".0%")));
 
     // color palette
 
