@@ -1,6 +1,5 @@
 import * as d3 from "d3";
 import * as topojson from "topojson-client";
-var state_trends = d3.csv("../data/state_trends.csv");
 
 // -------- Choro map ---------- //
 
@@ -67,10 +66,10 @@ function choroMap(us, data) {
     .selectAll(".state")
     .on("mouseover", function(d) {
       var state = d.target.__data__;
-      console.log(data[state.id].STATE);
-      if (typeof data[d.id] !== "undefined") {
+      // console.log(data[state.id].STATE);
+      if (typeof data[state.id] !== "undefined") {
         selected = data[state.id].STATE;
-        stateTrend(state_trend, selected); // Calls the function... should in theory create the chart
+        stateTrend(selected); // Calls the function... should in theory create the chart
       }
       tooltip.html(
         "<h3>" +
@@ -86,6 +85,9 @@ function choroMap(us, data) {
         .raise();
     })
     .on("mouseout", function() {
+      d3.select("#state-trend")
+        .selectAll("svg")
+        .remove();
       d3.select(this)
         .attr("stroke", "white")
         .style("opacity", 0.8)
@@ -104,98 +106,101 @@ var height = 400 - margin.top - margin.bottom;
 
 //Read the data
 
-function stateTrend(data, selected) {
+function stateTrend(selected) {
   // filter by one state
-  console.log(selected);
-  var filtered = data.filter(function(row) {
-    return row["STATE"] == String(selected) && row["YEAR"] >= 2010;
+  d3.csv("data/state_trends.csv").then(function(data) {
+    // console.log(data);
+    // console.log(selected);
+    var filtered = data.filter(function(row) {
+      return row["STATE"] == selected && row["YEAR"] >= 2010;
+    });
+    var svg = d3
+      .select("#state-trend")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    // console.log({ filtered });
+
+    // group the data: one array for each value of the X axis.
+    var sumstat = d3.group(filtered, (x) => x.YEAR);
+
+    var sources = [
+      "Coal",
+      "Oil",
+      "Natural Gas",
+      "Solar",
+      "Wind",
+      "Hydro",
+      "Nuclear",
+    ];
+
+    // console.log({ sumstat });
+    var stackedData = d3
+      .stack()
+      .keys(sources)
+      .value(function([year, values], key) {
+        const matchingThing = values.find((val) => val.ENERGY_SOURCE === key);
+        return !matchingThing ? 0 : matchingThing.PERCENT_GEN;
+      })(sumstat);
+
+    // Add X axis --> it is a date format
+    var x = d3
+      .scaleLinear()
+      .domain([
+        2010,
+        d3.max(data, function(d) {
+          return Number(d.YEAR);
+        }),
+      ])
+      .range([0, width]);
+    svg
+      .append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x).ticks(5));
+
+    // Add Y axis
+    var y = d3
+      .scaleLinear()
+      .domain([
+        0,
+        d3.max(data, function(d) {
+          return Number(d.PERCENT_GEN);
+        }),
+      ])
+      .range([height, 0]);
+    svg.append("g").call(d3.axisLeft(y));
+
+    // color palette
+    var color = d3
+      .scaleOrdinal()
+      .domain(sources)
+      .range([
+        "#323232",
+        "#634a4a",
+        "#eb9534",
+        "#f7eb45",
+        "cornflowerblue",
+        "#ab91ff",
+        "#e34646",
+      ]);
+
+    // Show the areas
+    // console.log(stackedData);
+    const areaFunc = d3
+      .area()
+      .x((d, i) => x(d.data[0]))
+      .y0((d) => y(d[0]))
+      .y1((d) => y(d[1]));
+    svg
+      .selectAll(".my-area")
+      .data(stackedData)
+      .join("path")
+      .attr("class", "my-area")
+      .style("fill", function(d) {
+        return color(d.key);
+      })
+      .attr("d", (d) => areaFunc(d));
   });
-  var svg = d3
-    .select("#state-trend")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-  // console.log({ filtered });
-
-  // group the data: one array for each value of the X axis.
-  var sumstat = d3.group(filtered, (x) => x.YEAR);
-
-  var sources = [
-    "Coal",
-    "Oil",
-    "Natural Gas",
-    "Solar",
-    "Wind",
-    "Hydro",
-    "Nuclear",
-  ];
-
-  // console.log({ sumstat });
-  var stackedData = d3
-    .stack()
-    .keys(sources)
-    .value(function([year, values], key) {
-      const matchingThing = values.find((val) => val.ENERGY_SOURCE === key);
-      return !matchingThing ? 0 : matchingThing.PERCENT_GEN;
-    })(sumstat);
-
-  // Add X axis --> it is a date format
-  var x = d3
-    .scaleLinear()
-    .domain([
-      2010,
-      d3.max(data, function(d) {
-        return Number(d.YEAR);
-      }),
-    ])
-    .range([0, width]);
-  svg
-    .append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x).ticks(5));
-
-  // Add Y axis
-  var y = d3
-    .scaleLinear()
-    .domain([
-      0,
-      d3.max(data, function(d) {
-        return Number(d.PERCENT_GEN);
-      }),
-    ])
-    .range([height, 0]);
-  svg.append("g").call(d3.axisLeft(y));
-
-  // color palette
-  var color = d3
-    .scaleOrdinal()
-    .domain(sources)
-    .range([
-      "#323232",
-      "#634a4a",
-      "#eb9534",
-      "#f7eb45",
-      "cornflowerblue",
-      "#ab91ff",
-      "#e34646",
-    ]);
-
-  // Show the areas
-  // console.log(stackedData);
-  const areaFunc = d3
-    .area()
-    .x((d, i) => x(d.data[0]))
-    .y0((d) => y(d[0]))
-    .y1((d) => y(d[1]));
-  svg
-    .selectAll(".my-area")
-    .data(stackedData)
-    .join("path")
-    .attr("class", "my-area")
-    .style("fill", function(d) {
-      return color(d.key);
-    })
-    .attr("d", (d) => areaFunc(d));
 }
