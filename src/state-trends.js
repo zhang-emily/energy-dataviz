@@ -3,8 +3,8 @@ import * as d3 from "d3";
 // Stacked line for state energy sources
 
 // set the dimensions and margins of the graph
-var margin = { top: 100, right: 30, bottom: 30, left: 60 };
-var width = 500 - margin.left - margin.right;
+var margin = { top: 150, right: 30, bottom: 30, left: 60 };
+var width = 400 - margin.left - margin.right;
 var height = 400 - margin.top - margin.bottom;
 
 //Read the data
