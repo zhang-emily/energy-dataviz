@@ -34,6 +34,7 @@
     "d3-geomap": "^3.3.0",
     "d3-scale": "^3.2.3",
     "d3-selection": "^2.0.0",
+    "d3-tip": "^0.9.1",
     "datamap": "0.0.2",
     "datamaps": "^0.5.9",
     "topojson": "^3.0.2",
