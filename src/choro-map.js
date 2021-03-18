@@ -25,62 +25,6 @@ var margin = { top: 0, right: 0, bottom: 0, left: 0 };
 var width = 300 - margin.left - margin.right;
 var height = 200 - margin.top - margin.bottom;
 
-// Format tooltip
-function callout(g, value) {
-  if (!value) return g.style("display", "none");
-
-  g.style("display", null)
-    .style("pointer-events", "none")
-    .style("font", "10px sans-serif");
-
-  var path = g
-    .selectAll("path")
-    .data([null])
-    .join("path")
-    .attr("fill", "white")
-    .attr("stroke", "black");
-
-  var text = g
-    .selectAll("text")
-    .data([null])
-    .join("text")
-    .call(function(text) {
-      text
-        .selectAll("tspan")
-        .data((value + "").split("/\n/"))
-        .join("tspan")
-        .attr("x", 0)
-        .attr("y", function(d, i) {
-          return i * 1.1 + "em";
-        })
-        .style("font-weight", function(_, i) {
-          return i ? null : "bold";
-        })
-        .text(function(d) {
-          return d;
-        });
-    });
-
-  var x = text.node().getBBox().x;
-  var y = text.node().getBBox().y;
-  var w = text.node().getBBox().width;
-  var h = text.node().getBBox().height;
-
-  text.attr("transform", "translate(" + -w / 2 + "," + (15 - y) + ")");
-  path.attr(
-    "d",
-    "M" +
-      (-w / 2 - 10) +
-      ",5H-5l5,-5l5,5H" +
-      (w / 2 + 10) +
-      "v" +
-      (h + 20) +
-      "h-" +
-      (w + 20) +
-      "z"
-  );
-}
-
 //Read the data
 
 d3.csv("data/choro_2019.csv").then(function(data) {
@@ -113,30 +57,28 @@ d3.csv("data/choro_2019.csv").then(function(data) {
     .style("opacity", 0.8)
     .attr("d", path);
 
-  var tooltip = svg.append("g");
+  var tooltip = d3.select("#state-info").append("g");
 
   // Create and customize tooltip - https://bl.ocks.org/duynguyen158/b96fa12ed5590b8435af799728e00a96
   svg
     .selectAll(".state")
     .on("mouseover", function(d) {
       var state = d.target.__data__;
-      // console.log(d.target);
-      tooltip.call(callout, data[state.id] + "/\n/" + state.properties.name);
+      console.log(data[state.id].Top_Source);
+      tooltip.html(
+        "<h3>" +
+          state.properties.name +
+          "</h3>" +
+          "<br><p><strong>Predominant Energy Source: </strong>" +
+          data[state.id].Top_Source +
+          "</p>"
+      );
       d3.select(this)
         .attr("stroke", "red")
         .style("opacity", 1)
         .raise();
     })
-    .on("mousemove", function() {
-      console.log(d3.pointer(this));
-      tooltip.attr(
-        "transform",
-        "translate(" + d3.pointer(this)[0] + "," + d3.pointer(this)[1] + ")"
-        // "translate(" + d3.event.pageX + "," + d3.event.pageY + ")"
-      );
-    })
     .on("mouseout", function() {
-      tooltip.call(callout, null);
       d3.select(this)
         .attr("stroke", "white")
         .style("opacity", 0.8)
