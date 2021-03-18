@@ -7,9 +7,19 @@ var projection = d3.geoAlbersUsa();
 
 var selected = "";
 
+var sources = [
+  "Coal",
+  "Oil",
+  "Natural Gas",
+  "Solar",
+  "Wind",
+  "Hydro",
+  "Nuclear",
+];
+
 var color = d3
   .scaleOrdinal()
-  .domain(["Coal", "Oil", "Natural Gas", "Solar", "Wind", "Hydro", "Nuclear"])
+  .domain(sources)
   .range([
     "#323232",
     "#634a4a",
@@ -75,12 +85,12 @@ function choroMap(us, data) {
         stateTrend(selected); // Calls the function... should in theory create the chart
       }
       tooltip.html(
-        "<h3>" +
+        "<h4>" +
           state.properties.name +
-          "</h3>" +
-          "<br><p><strong>Predominant Energy Source: </strong>" +
+          "</h4>" +
+          "<br><h5><strong>Predominant Energy Source: </strong>" +
           data[state.id].Top_Source +
-          "</p>"
+          "</h5>"
       );
       d3.select(this)
         .attr("stroke", "red")
@@ -126,16 +136,6 @@ function stateTrend(selected) {
     // group the data: one array for each value of the X axis.
     var sumstat = d3.group(filtered, (x) => x.YEAR);
 
-    var sources = [
-      "Coal",
-      "Oil",
-      "Natural Gas",
-      "Solar",
-      "Wind",
-      "Hydro",
-      "Nuclear",
-    ];
-
     // console.log({ sumstat });
     var stackedData = d3
       .stack()
@@ -170,21 +170,10 @@ function stateTrend(selected) {
         }),
       ])
       .range([height, 0]);
+
     svg.append("g").call(d3.axisLeft(y));
 
     // color palette
-    var color = d3
-      .scaleOrdinal()
-      .domain(sources)
-      .range([
-        "#323232",
-        "#634a4a",
-        "#eb9534",
-        "#f7eb45",
-        "cornflowerblue",
-        "#ab91ff",
-        "#e34646",
-      ]);
 
     // Show the areas
     // console.log(stackedData);
