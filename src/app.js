@@ -42,9 +42,6 @@ Promise.all([
 
 // Function to create maps
 function choroMap(us, data) {
-  // console.log(us);
-  // console.log(data);
-
   // Draw the map
   var path = d3.geoPath().projection(projection);
 
@@ -61,7 +58,6 @@ function choroMap(us, data) {
     .attr("class", "state")
     .attr("fill", function(d, key) {
       // setting the fill
-      // console.log(data);
       const thRow = data.find(function(x) {
         return Number(x.id) === Number(d.id);
       });
@@ -82,16 +78,13 @@ function choroMap(us, data) {
     .selectAll(".state")
     .on("mouseover", function(d) {
       var state = d.target.__data__;
-      // console.log(state);
       d3.select("#state-trend")
         .selectAll("svg")
         .remove();
       const thRow = data.find(function(x) {
         return Number(x.id) === Number(state.id);
       });
-      console.log(thRow);
       if (thRow) {
-        console.log(thRow.STATE);
         selected = thRow.STATE;
         stateTrend(selected);
         tooltip.html(
@@ -134,8 +127,6 @@ var height = 300 - margin.top - margin.bottom;
 function stateTrend(selected) {
   // filter by one state
   d3.csv("data/state_trends.csv").then(function(data) {
-    // console.log(data);
-    // console.log(selected);
     var filtered = data.filter(function(row) {
       return row["STATE"] == selected && row["YEAR"] >= 2010;
     });
@@ -146,12 +137,10 @@ function stateTrend(selected) {
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    // console.log({ filtered });
 
     // group the data: one array for each value of the X axis.
     var sumstat = d3.group(filtered, (x) => x.YEAR);
 
-    // console.log({ sumstat });
     var stackedData = d3
       .stack()
       .keys(sources)
@@ -216,7 +205,6 @@ function stateTrend(selected) {
     // color palette
 
     // Show the areas
-    // console.log(stackedData);
     const areaFunc = d3
       .area()
       .x((d, i) => x(d.data[0]))
