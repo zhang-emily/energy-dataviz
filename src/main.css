@@ -18,12 +18,27 @@ body {
   font-size: 0.4em;
   align-content: center;
 }
+.row {
+  text-align: center;
+}
 
 .row {
   margin-top: 50px;
   width: 90%;
 }
 
+.row .map-col {
+  width: 70%;
+}
+.row .chart-col {
+  width: 30%;
+}
+#choro-map {
+  margin-top: 50px;
+}
+.col-2,
+#state-info,
 #state-trend {
-  width: 100%;
+  margin: 0;
+  padding: 0;
 }
