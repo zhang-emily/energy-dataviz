@@ -2,13 +2,16 @@ a {
   cursor: pointer;
 }
 
-html, body {
+html,
+body {
   background: #d6d6ce;
   font-family: Verdana, Geneva, sans-serif;
   height: 100%;
-  margin: 0;
+  margin-right: 5%;
+  margin-left: 5%;
+  margin-top: 20px;
   padding: 0;
-  width: 100%;
+  width: 90%;
 }
 
 .h1 {
@@ -16,8 +19,11 @@ html, body {
   align-content: center;
 }
 
-#choro-map {
-  height: 600px;
-  width: 400px;
-  position: absolute;
+.row {
+  margin-top: 50px;
+  width: 90%;
+}
+
+#state-trend {
+  width: 100%;
 }

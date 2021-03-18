@@ -7,19 +7,9 @@ import us from "../data/states-10m.json";
 
 var projection = d3.geoAlbersUsa();
 
-var sources = [
-  "Coal",
-  "Oil",
-  "Natural Gas",
-  "Solar",
-  "Wind",
-  "Hydro",
-  "Nuclear",
-];
-
 var color = d3
   .scaleOrdinal()
-  .domain(sources)
+  .domain(["Coal", "Oil", "Natural Gas", "Solar", "Wind", "Hydro", "Nuclear"])
   .range([
     "#323232",
     "#634a4a",
@@ -120,6 +110,7 @@ d3.csv("data/choro_2019.csv").then(function(data) {
     .attr("d", d3.geoPath().projection(projection)) // draw each state
     .attr("stroke", "white")
     .attr("stroke-linejoin", "round")
+    .style("opacity", 0.8)
     .attr("d", path);
 
   var tooltip = svg.append("g");
@@ -133,6 +124,7 @@ d3.csv("data/choro_2019.csv").then(function(data) {
       tooltip.call(callout, data[state.id] + "/\n/" + state.properties.name);
       d3.select(this)
         .attr("stroke", "red")
+        .style("opacity", 1)
         .raise();
     })
     .on("mousemove", function() {
@@ -146,7 +138,8 @@ d3.csv("data/choro_2019.csv").then(function(data) {
     .on("mouseout", function() {
       tooltip.call(callout, null);
       d3.select(this)
-        .attr("stroke", null)
+        .attr("stroke", "white")
+        .style("opacity", 0.8)
         .lower();
     });
 });
