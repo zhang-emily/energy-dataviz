@@ -18,6 +18,9 @@ body {
   font-size: 0.4em;
   align-content: center;
 }
+.h4 {
+  font-weight: bold;
+}
 .row {
   text-align: center;
 }

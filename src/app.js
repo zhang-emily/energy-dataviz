@@ -15,6 +15,7 @@ var sources = [
   "Wind",
   "Hydro",
   "Nuclear",
+  "Other",
 ];
 
 var color = d3
@@ -28,6 +29,7 @@ var color = d3
     "cornflowerblue",
     "#ab91ff",
     "#e34646",
+    "#BEBEBE",
   ]);
 
 Promise.all([
@@ -59,6 +61,7 @@ function choroMap(us, data) {
     .attr("class", "state")
     .attr("fill", function(d, key) {
       // setting the fill
+      console.log(data);
       if (typeof data[d.id] !== "undefined") {
         return color(data[d.id].Top_Source);
       }
