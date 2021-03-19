@@ -91,7 +91,7 @@ function choroMap(us, data) {
     .attr("d", d3.geoPath().projection(projection)) // draw each state
     .attr("stroke", "white")
     .attr("stroke-linejoin", "round")
-    .style("opacity", 0.8)
+    .style("opacity", 0.85)
     .attr("d", path);
 
   var tooltip = d3.select("#state-chart").append("g");
@@ -102,7 +102,7 @@ function choroMap(us, data) {
     .on("mouseout", function() {
       d3.select(this)
         .attr("stroke", "white")
-        .style("opacity", 0.8)
+        .style("opacity", 0.85)
         .lower();
     })
     .on("mouseover", function(d) {
@@ -239,6 +239,7 @@ function stateTrend(selected) {
       .data(stackedData)
       .join("path")
       .attr("class", "my-area")
+      .style("opacity", 0.9)
       .style("fill", function(d) {
         return color(d.key);
       })
