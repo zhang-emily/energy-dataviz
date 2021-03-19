@@ -35,7 +35,7 @@ var color = d3
 
 Promise.all([
   d3.json("data/states-10m.json"),
-  d3.csv("data/choro_2019.csv"),
+  d3.csv("data/choro-data-2019.csv"),
 ]).then((results) => {
   const [us, data] = results;
   choroMap(us, data);
@@ -129,7 +129,8 @@ function choroMap(us, data) {
             state.properties.name +
             " is " +
             thRow.Top_Source +
-            "." +
+            ". " +
+            thRow.Narration +
             "</p>"
         );
       }
@@ -146,10 +147,12 @@ function stateTrend(selected) {
   var width = 350 - margin.left - margin.right;
   var height = 250 - margin.top - margin.bottom;
 
+  var startyear = 2000;
+
   // filter by one state
-  d3.csv("data/state_trends.csv").then(function(data) {
+  d3.csv("data/state-trends.csv").then(function(data) {
     var filtered = data.filter(function(row) {
-      return row["STATE"] == selected && row["YEAR"] >= 2010;
+      return row["STATE"] == selected && row["YEAR"] >= startyear;
     });
     var svg = d3
       .select("#state-chart")
@@ -174,7 +177,7 @@ function stateTrend(selected) {
     var x = d3
       .scaleLinear()
       .domain([
-        2010,
+        startyear,
         d3.max(data, function(d) {
           return Number(d.YEAR);
         }),
