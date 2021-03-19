@@ -21,6 +21,13 @@ body {
 .h4 {
   font-weight: bold;
 }
+
+.caption {
+  fill: #000;
+  text-anchor: start;
+  font-weight: bold;
+}
+
 .row .map-col {
   text-align: center;
 }

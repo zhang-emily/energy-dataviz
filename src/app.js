@@ -1,7 +1,6 @@
 import * as d3 from "d3";
 import * as topojson from "topojson-client";
 import * as d3_legend from "d3-svg-legend";
-import debounce from "lodash.debounce";
 
 // -------- Choro map ---------- //
 
@@ -137,18 +136,16 @@ function choroMap(us, data) {
     });
 }
 
-// ----- Stacked bar chart ----- //
-
 // Stacked line for state energy sources
-
-// set the dimensions and margins for state trend graph
-var margin = { top: 30, right: 30, bottom: 50, left: 60 };
-var width = 350 - margin.left - margin.right;
-var height = 250 - margin.top - margin.bottom;
 
 //Read the data
 
 function stateTrend(selected) {
+  // set the dimensions and margins for state trend graph
+  var margin = { top: 30, right: 30, bottom: 50, left: 60 };
+  var width = 350 - margin.left - margin.right;
+  var height = 250 - margin.top - margin.bottom;
+
   // filter by one state
   d3.csv("data/state_trends.csv").then(function(data) {
     var filtered = data.filter(function(row) {
@@ -244,5 +241,160 @@ function stateTrend(selected) {
         return color(d.key);
       })
       .attr("d", (d) => areaFunc(d));
+
+    // svg
+    //   .append("text")
+    //   .data(stackedData)
+    //   .datum(function(d) {
+    //     console.log(d);
+    //     return { name: d.name, value: d.values[d.values.length - 1] };
+    //   })
+    //   .attr("transform", function(d) {
+    //     return (
+    //       "translate(" +
+    //       x(d.value.date) +
+    //       "," +
+    //       y(d.value.y0 + d.value.y / 2) +
+    //       ")"
+    //     );
+    //   })
+    //   .attr("x", -6)
+    //   .attr("dy", ".35em")
+    //   .text(function(d) {
+    //     return d.name;
+    //   });
   });
+
+  // Tooltip
+
+  // var bisectDate = d3.bisector(function(d) {
+  //   return d.date;
+  // }).left;
+
+  // var focus = svg
+  //   .append("g")
+  //   .attr("class", "focus")
+  //   .style("display", "none");
+
+  // focus.append("circle").attr("r", 5);
+
+  // focus
+  //   .append("text")
+  //   .attr("x", 9)
+  //   .attr("dy", ".35em")
+  //   .style("font-size", 15);
+
+  // var focus2 = svg
+  //   .append("g")
+  //   .attr("class", "focus")
+  //   .style("display", "none");
+
+  // focus2.append("circle").attr("r", 5);
+
+  // focus2
+  //   .append("text")
+  //   .attr("x", 9)
+  //   .attr("dy", ".35em")
+  //   .style("font-size", 15);
+
+  // var focus3 = svg
+  //   .append("g")
+  //   .attr("class", "focus")
+  //   .style("display", "none");
+
+  // focus3.append("circle").attr("r", 5);
+
+  // focus3
+  //   .append("text")
+  //   .attr("x", 9)
+  //   .attr("dy", ".35em")
+  //   .style("font-size", 15);
+
+  // var focus4 = svg
+  //   .append("g")
+  //   .attr("class", "focus")
+  //   .style("display", "none");
+
+  // focus4.append("circle").attr("r", 5);
+
+  // focus4
+  //   .append("text")
+  //   .attr("x", 9)
+  //   .attr("dy", ".5em")
+  //   .style("font-size", 15);
+
+  // svg
+  //   .append("rect")
+  //   .attr("class", "overlay")
+  //   .attr("width", width)
+  //   .attr("height", height)
+  //   .on("mouseover", function() {
+  //     focus.style("display", null);
+  //     focus2.style("display", null);
+  //     focus3.style("display", null);
+  //     focus4.style("display", null);
+  //   })
+  //   .on("mouseout", function() {
+  //     focus.style("display", "none");
+  //     focus2.style("display", "none");
+  //     focus3.style("display", "none");
+  //     focus4.style("display", "none");
+  //   })
+  //   .on("mousemove", mousemove);
+
+  // function mousemove() {
+  //   var x0 = x.invert(d3.pointer(this)[0]),
+  //     i = bisectDate(data, x0, 1),
+  //     d0 = data[i - 1],
+  //     d1 = data[i],
+  //     d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+  //   console.log(d);
+  //   var depl =
+  //     parseFloat(d["Safari"]) +
+  //     parseFloat(d["Opera"]) +
+  //     parseFloat(d["Firefox"]);
+  //   var depl2 = parseFloat(d["Safari"]) + parseFloat(d["Opera"]);
+  //   var depl3 =
+  //     parseFloat(d["Safari"]) +
+  //     parseFloat(d["Opera"]) +
+  //     parseFloat(d["Firefox"]) +
+  //     parseFloat(d["Chrome"]);
+  //   var depl4 = parseFloat(d["Opera"]);
+  //   focus.attr(
+  //     "transform",
+  //     "translate(" +
+  //       x(d.date) +
+  //       "," +
+  //       ((500 - margin.top - margin.bottom) * depl) / 100 +
+  //       ")"
+  //   );
+  //   focus2.attr(
+  //     "transform",
+  //     "translate(" +
+  //       x(d.date) +
+  //       "," +
+  //       ((500 - margin.top - margin.bottom) * depl2) / 100 +
+  //       ")"
+  //   );
+  //   focus3.attr(
+  //     "transform",
+  //     "translate(" +
+  //       x(d.date) +
+  //       "," +
+  //       ((500 - margin.top - margin.bottom) * depl3) / 100 +
+  //       ")"
+  //   );
+  //   focus4.attr(
+  //     "transform",
+  //     "translate(" +
+  //       x(d.date) +
+  //       "," +
+  //       ((500 - margin.top - margin.bottom) * depl4) / 100 +
+  //       ")"
+  //   );
+  //   focus.select("text").text(100 - depl, 1 + "%");
+  //   focus2.select("text").text(100 - depl2, 1 + "%");
+  //   focus3.select("text").text(100 - depl3, 1 + "%");
+  //   focus4.select("text").text(100 - depl4, 1 + "%");
+  // }
 }
