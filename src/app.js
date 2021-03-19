@@ -1,5 +1,7 @@
 import * as d3 from "d3";
 import * as topojson from "topojson-client";
+// import { legend } from "d3-color-legend";
+import * as d3_legend from "d3-svg-legend";
 
 // -------- Choro map ---------- //
 
@@ -48,8 +50,29 @@ function choroMap(us, data) {
   var svg = d3
     .select("#choro-map")
     .append("svg")
-    .attr("viewBox", [0, 0, 975, 610]);
+    .attr("viewBox", [0, 0, 1050, 500]);
 
+  // Legend - source: http://bl.ocks.org/palewire/d2906de347a160f38bc0b7ca57721328
+  var g = svg
+    .append("g")
+    .attr("class", "legendThreshold")
+    .attr("transform", "translate(900,20)");
+  g.append("text")
+    .attr("class", "caption")
+    .attr("x", 0)
+    .attr("y", -6)
+    .text("Energy Source");
+  var labels = sources;
+  var legend = d3_legend
+    .legendColor()
+    .labels(function(d) {
+      return labels[d.i];
+    })
+    .shapePadding(4)
+    .scale(color);
+  svg.select(".legendThreshold").call(legend);
+
+  // Rest of the map
   svg
     .append("g")
     .selectAll("path")
@@ -88,15 +111,15 @@ function choroMap(us, data) {
         selected = thRow.STATE;
         stateTrend(selected);
         tooltip.html(
-          "<h4>" +
+          "<h5><strong>" +
             state.properties.name +
-            "</h4><br><h5>" +
+            "</strong></h5><br><p>" +
             "The primary energy source in " +
             state.properties.name +
             " is " +
             thRow.Top_Source +
             "." +
-            "</h5>"
+            "</p>"
         );
       }
       /// --- Added code above
@@ -117,10 +140,10 @@ function choroMap(us, data) {
 
 // Stacked line for state energy sources
 
-// set the dimensions and margins of the graph
+// set the dimensions and margins for state trend graph
 var margin = { top: 30, right: 30, bottom: 50, left: 60 };
-var width = 400 - margin.left - margin.right;
-var height = 300 - margin.top - margin.bottom;
+var width = 350 - margin.left - margin.right;
+var height = 250 - margin.top - margin.bottom;
 
 //Read the data
 

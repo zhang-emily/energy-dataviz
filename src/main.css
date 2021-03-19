@@ -7,11 +7,11 @@ body {
   background: #d6d6ce;
   font-family: Verdana, Geneva, sans-serif;
   height: 100%;
-  margin-right: 5%;
-  margin-left: 5%;
+  margin-right: 2%;
+  margin-left: 2%;
   margin-top: 20px;
   padding: 0;
-  width: 90%;
+  width: 95%;
 }
 
 .h1 {
@@ -27,14 +27,15 @@ body {
 
 .row {
   margin-top: 50px;
-  width: 90%;
+  width: 95%;
 }
 
 .row .map-col {
-  width: 70%;
+  width: 75%;
 }
 .row .chart-col {
-  width: 30%;
+  margin-left: 30px;
+  width: 20%;
 }
 #choro-map {
   margin-top: 50px;

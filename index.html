@@ -19,7 +19,14 @@
     <link rel="stylesheet" href="src/main.css" />
     <div class="header-text">
         <h2>Energy Generation by State</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>In the U.S., energy generation is highly geographical and often depends on what resources are readily avaiable
+          in a given region. The map below shows the dominant energy source for generation for each state in 2019. <br><br>
+          For example, natural gas is the dominant source of electricity generation in the South and mid-Atlantic. 
+          Coal is dominant much of the central U.S. For carbon-free electricity sources, it is encouraging to see wind 
+          dominate in Midwestern states such as Iowa and Kansas, in large part due to how windy these states are. 
+          Hydroelectric is the primary energy source in several states in the Pacific Northwest and New England. 
+          Nuclear provides the biggest proportion of energy several states in the Eastern U.S.
+        </p>
     </div>
     <div class="row">
       <div class="map-col">
@@ -32,6 +39,17 @@
       <div class="chart-col">
         <div id="state-info"></div>
         <div id="state-trend"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="sources">
+          <p>Sources:<br></p>
+          <ul>
+            <li>EIA state-level generation by energy source (<a href="https://www.eia.gov/electricity/data/state/">link</a>) </li>
+            <li>Geographic shape files from Topojson (<a href="https://github.com/topojson/us-atlas/releases">link</a>)</li>
+            <li>D3 code samples (<a href="https://observablehq.com/@d3/choropleth">choropleth</a>, 
+              <a href="https://www.d3-graph-gallery.com/graph/stackedarea_basic.html">stacked area</a>)</li>
+          </ul>
         </div>
       </div>
     </div>
