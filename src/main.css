@@ -11,7 +11,7 @@ body {
   margin-left: 2%;
   margin-top: 20px;
   padding: 0;
-  width: 95%;
+  width: 96%;
 }
 
 .h1 {
@@ -27,22 +27,23 @@ body {
 
 .row {
   margin-top: 50px;
-  width: 95%;
+  width: 100%;
 }
 
 .row .map-col {
-  width: 75%;
+  width: 70%;
 }
 .row .chart-col {
-  margin-left: 30px;
-  width: 20%;
+  margin-top: 5%;
+  width: 30%;
 }
 #choro-map {
   margin-top: 50px;
 }
 .col-2,
 #state-info,
-#state-trend {
+#state-chart {
   margin: 0;
   padding: 0;
+  width: 100%;
 }
