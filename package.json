@@ -40,6 +40,7 @@
     "d3-tip": "^0.9.1",
     "datamap": "0.0.2",
     "datamaps": "^0.5.9",
+    "lodash.debounce": "^4.0.8",
     "topojson": "^3.0.2",
     "topojson-client": "^3.1.0"
   },

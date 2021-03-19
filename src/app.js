@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 import * as topojson from "topojson-client";
-// import { legend } from "d3-color-legend";
 import * as d3_legend from "d3-svg-legend";
+import debounce from "lodash.debounce";
 
 // -------- Choro map ---------- //
 
@@ -99,7 +99,19 @@ function choroMap(us, data) {
   // Create and customize tooltip - https://bl.ocks.org/duynguyen158/b96fa12ed5590b8435af799728e00a96
   svg
     .selectAll(".state")
+    .on("mouseout", function() {
+      d3.select(this)
+        .attr("stroke", "white")
+        .style("opacity", 0.8)
+        .lower();
+    })
     .on("mouseover", function(d) {
+      d3.select(this)
+        .attr("stroke", "red")
+        .style("opacity", 1)
+        .raise();
+    })
+    .on("click", function(d) {
       var state = d.target.__data__;
       d3.select("#state-chart")
         .selectAll("svg")
@@ -109,7 +121,11 @@ function choroMap(us, data) {
       });
       if (thRow) {
         selected = thRow.STATE;
+        // var debounce_fun = debounce(function() {
+        //   stateTrend(selected);
+        // }, 500);
         stateTrend(selected);
+        // debounce_fun();
         tooltip.html(
           "<h5><strong>" +
             state.properties.name +
@@ -122,17 +138,6 @@ function choroMap(us, data) {
             "</p>"
         );
       }
-      /// --- Added code above
-      d3.select(this)
-        .attr("stroke", "red")
-        .style("opacity", 1)
-        .raise();
-    })
-    .on("mouseout", function() {
-      d3.select(this)
-        .attr("stroke", "white")
-        .style("opacity", 0.8)
-        .lower();
     });
 }
 
