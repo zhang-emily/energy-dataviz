@@ -94,14 +94,14 @@ function choroMap(us, data) {
     .style("opacity", 0.8)
     .attr("d", path);
 
-  var tooltip = d3.select("#state-info").append("g");
+  var tooltip = d3.select("#state-chart").append("g");
 
   // Create and customize tooltip - https://bl.ocks.org/duynguyen158/b96fa12ed5590b8435af799728e00a96
   svg
     .selectAll(".state")
     .on("mouseover", function(d) {
       var state = d.target.__data__;
-      d3.select("#state-trend")
+      d3.select("#state-chart")
         .selectAll("svg")
         .remove();
       const thRow = data.find(function(x) {
@@ -154,7 +154,7 @@ function stateTrend(selected) {
       return row["STATE"] == selected && row["YEAR"] >= 2010;
     });
     var svg = d3
-      .select("#state-trend")
+      .select("#state-chart")
       .append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)

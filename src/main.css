@@ -21,7 +21,7 @@ body {
 .h4 {
   font-weight: bold;
 }
-.row {
+.row .map-col {
   text-align: center;
 }
 
@@ -34,7 +34,7 @@ body {
   width: 70%;
 }
 .row .chart-col {
-  margin-top: 5%;
+  margin-top: 8%;
   width: 30%;
 }
 #choro-map {
@@ -45,5 +45,8 @@ body {
 #state-chart {
   margin: 0;
   padding: 0;
+  width: 100%;
+}
+.sources {
   width: 100%;
 }
