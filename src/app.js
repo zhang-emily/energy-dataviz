@@ -121,11 +121,7 @@ function choroMap(us, data) {
       });
       if (thRow) {
         selected = thRow.STATE;
-        // var debounce_fun = debounce(function() {
-        //   stateTrend(selected);
-        // }, 500);
         stateTrend(selected);
-        // debounce_fun();
         tooltip.html(
           "<h5><strong>" +
             state.properties.name +
