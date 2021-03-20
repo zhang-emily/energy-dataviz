@@ -2,6 +2,13 @@ import * as d3 from "d3";
 import * as topojson from "topojson-client";
 import * as d3_legend from "d3-svg-legend";
 
+// -------- Radio button ---------- //
+
+const buttons = d3.selectAll("input");
+buttons.on("change", function() {
+  console.log(this.value);
+});
+
 // -------- Choro map ---------- //
 
 var projection = d3.geoAlbersUsa();

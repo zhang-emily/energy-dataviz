@@ -38,10 +38,12 @@ body {
 }
 
 .row .map-col {
-  width: 70%;
+  width: 68%;
 }
 .row .chart-col {
-  width: 30%;
+  margin-top: 4%;
+  margin-left: 4%;
+  width: 28%;
 }
 #choro-map {
   margin-top: 50px;
