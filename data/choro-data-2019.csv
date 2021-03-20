@@ -1,0 +1,52 @@
+﻿id,STATE,Top_Source,Narration,Renew_Target,Goal
+2,AK,Natural Gas,"Alaska's energy mix has not significantly changed in the past decade, and is dominated by natural gas and hydropower.",None,None
+1,AL,Natural Gas,"Coal used to be Alabama's primary source of energy, but that has been displaced by cheaper natural gas. Nuclear is also a top source of energy",None,None
+5,AR,Coal,"Coal has consistently dominated Arkansas' energy mix, though natural gas is expanding in the state. ",None,None
+4,AZ,Natural Gas,"Coal used to be Arizona's primary source of energy, but that has been displaced by cheaper natural gas. Nuclear is also a top source of energy",RPS,15% by 2025.
+6,CA,Natural Gas,"California has no coal - it uses natural gas as its primary fossil fuel. California also leads in renewable energy, with the most amount of solar in any state at 20% of total generation.",RPS,44% by 2024; 52% by 2027; 60% by 2030. Also requires 100% clean energy by 2045. 
+8,CO,Coal,"Coal has consistently dominated Colorado's energy mix, though natural gas is expanding in the state. ",RPS,"30% by 2020 (IOUs); 10% or 20% for municipalities and electric cooperatives depending on size; 100% clean energy by 2050 for utilities serving 500,000 or more customers. "
+9,CT,Natural Gas,"Besides natural gas, Connecticut also produces a lot of nuclear power.",RPS,44% by 2030.
+11,DC,Solar,-,,"20% by 2020, 100% by 2032."
+10,DE,Natural Gas,Natural gas is about 90% of all generation. It has displaced coal as the main energy source in Delaware.,RPS,"25% by 2025, 28% by 2030, and 40% by 2035."
+12,FL,Natural Gas,"Natural gas has displaced coal as the dominant energy source, and now makes up 74% of all generation.",None,None
+13,GA,Natural Gas,"Natural gas displaced coal as the dominant energy source, and now makes up almost half of all generation.",None,None
+15,HI,Oil,"Hawaii, as an island country, relies heavily on imported petroleum to make electricity. Solar is increasing in the state, now at 13% of all generation.",RPS,30% by 2020; 40% by 2030; 70% by 2040; 100% by 2045.
+19,IA,Wind,"Wind has grown significantly in the state in the last decade, and has taken over as the state's top energy source after years of being dominated by coal.",RPS,105 MW of generating capacity for IOUs.
+16,ID,Hydro,Idaho produces over half of its electricity from hydroelectric. Natural gas and wind are shares are beginning to increase in recent years.,None,None
+17,IL,Nuclear,"Besides nuclear, Illinois also produces a significant amount of electricity from coal.",RPS,25% by 2025-2026.
+18,IN,Coal,"In the past few years, natural gas is starting to displace some of the coal generation.",Voluntary,10% by 2025.
+20,KS,Wind,"Wind has grown significantly in the state in the last decade, and has taken over as the state's top energy source after years of being dominated by coal.",Voluntary,15% by 2015-2019; 20% by 2020.
+21,KY,Coal,"In the past few years, natural gas is starting to displace some of the coal generation.",None,None
+22,LA,Natural Gas,"Natural gas has increased its share in recent years, displacing coal.",None,None
+25,MA,Natural Gas,"Due to some of the most renewable-friendly policies, solar has grown substantially in Massachussetts, while coal has decreased.",RPS,Class I: 35% by 2030 and an additional 1% each year after. Class II: 6.7% by 2020.
+24,MD,Nuclear,"Coal has decreased over the years, being replaced by natural gas.",RPS,30.5% in 2020; 50% in 2030.
+23,ME,Hydro,"Natural gas, biomass, and wind closely follow, each with about a quarter of generation. Wind in particular has grown quickly over the years, while natural gas has decreased.",RPS,80% by 2030; statewide target of 100% renewables by 2050. 
+26,MI,Coal,"Coal has decreased over the years, being replaced by natural gas.",RPS,"15% by 2021 (standard), 35% by 2025 (goal, including energy efficiency and demand reduction)."
+27,MN,Coal,Wind and natural gas are chipping away at the share of coal. ,RPS,"26.5% by 2025 (IOUs), 25% by 2025 (other utilities)."
+29,MO,Coal,Coal has remained steadily the dominant source of energy generation.,RPS,15% by 2021 (IOUs).
+28,MS,Natural Gas,"Natural has has displaced coal as the dominant energy source, and now makes up 74% of all generation.",None,None
+30,MT,Coal,"Besides coal, Montana also relies heavily on hydroelectric.",RPS,15% by 2015.
+37,NC,Nuclear,"Coal has decreased over the years, being replaced by natural gas.",RPS,12.5% by 2021 (IOUs); 10% by 2018 (munis and coops).
+38,ND,Coal,"Coal has consistently dominated North Dakota's energy mix, though wind is expanding in the state. ",Voluntary,10% by 2015.
+31,NE,Coal,"Besides coal, wind is starting to increasae in Nebraska, and currently provides 20% of all generation.",None,None
+33,NH,Nuclear,"Natural gas is also an important energy source in New Hampshire, and has replaced much of the coal over the years.",RPS,25.2% by 2025.
+34,NJ,Natural Gas,"Besides natural gas, New Jersey also produces a lot of nuclear power.",RPS,50% by 2030.
+35,NM,Coal,"Coal has consistently dominated New Mexico's energy mix, though natural gas is expanding in the state. ",RPS,40% by 2025; 80% renewables by 2040; 100% of electricity supplied by zero-carbon resources by 2045.
+32,NV,Natural Gas,"Natural gas has significantly increased its share in recent years, displacing coal. Solar is also on the rise, at 14% of all generation.",RPS,50% by 2030; non-binding 100% carbon-free by 2050.
+36,NY,Nuclear,"Nuclear and hydroelectric closely follow, with about 20-30% share each.",RPS,70% renewables by 2030; 100% zero-emissions electricity requirement by 2040.  
+39,OH,Natural Gas,"Natural gas displaced coal as the dominant energy source, and now makes up almost half of all generation.",RPS,8.5% by 2026. 
+40,OK,Natural Gas,"Natural gas displaced coal as the dominant energy source, and now makes up over half of all generation. Wind has also increased rapidly in the state.",Voluntary,15% by 2015.
+41,OR,Hydro,"Hydroelectric has long been the dominant energy source in the state, though natural gas and wind are increasing.",RPS,25% by 2025 (utilities with 3% or more of the state’s load); 50% by 2040 (utilities with 3% or more of the state’s load); 10% by 2025 (utilities with 1.5–3% of the state's load); 5% by 2025 (utilities with less than 1.5% of the state’s load).
+42,PA,Natural Gas,"Natural gas displaced coal as the dominant energy source, and now makes up almost half of all generation. Nuclear is also an important energy source in Pennsylvania.",RPS,18% by 2020-2021.
+44,RI,Natural Gas,Natural gas has long been the dominant energy source in Rhode Island.,RPS,"14.5% by 2019, with increases of 1.5% each year until 38.5% by 2035."
+45,SC,Nuclear,"Besides nuclear, natural gas has been on the rise, replacing some of the state's coal generation.",Voluntary,2% by 2021.
+46,SD,Hydro,"Wind has also grown substantially in the state, and now provides a quarter of all generation. Coal, on the other hand, has declined over time.",Voluntary,10% by 2015.
+47,TN,Nuclear,"Coal has decreased over the years, being replaced by natural gas and nuclear's rising share.",None,None
+48,TX,Natural Gas,"Coal has been replaced by Texas' rising share of wind over the years. Currently, Texas is the country's biggest wind producer by total generation, and produces 17% of all electricity by wind.",RPS,"5,880 MW by 2015. 10,000 MW by 2025 (goal; achieved)."
+49,UT,Coal,"Coal has consistently dominated Utah's energy mix, though natural gas is expanding in the state, along with some solar.",Voluntary,20% by 2025.
+51,VA,Natural Gas,"Natural gas displaced coal as the dominant energy source, and now makes up over half of all generation.",RPS,100% renewables by 2045 for Phase II utilities and 2050 for Phase I utilities. 
+50,VT,Hydro,Hydroelectric has replaced the once dominant nuclear powe. Shares of wind and solar have also grown.,RPS,55% by 2017; 75% by 2032.
+53,WA,Hydro,Hydroelectric has long been the dominant energy source in the state. Wind is slowly growing.,RPS,15% renewable by 2020; 100% greenhouse gas neutral by 2030; 100% renewable or zero-emitting by 2045. 
+55,WI,Coal,"Coal has consistently dominated Wisconsin's energy mix, though natural gas is expanding in the state. ",RPS,10% by 2015.
+54,WV,Coal,"Coal is by far the largest energy source in the state, at 91% of all generation.",None,None
+56,WY,Coal,"Coal is by far the largest energy source in the state, at 84% of all generation.",None,None
