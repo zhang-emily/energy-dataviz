@@ -2,13 +2,6 @@ import * as d3 from "d3";
 import * as topojson from "topojson-client";
 import * as d3_legend from "d3-svg-legend";
 
-// -------- Radio button ---------- //
-
-const buttons = d3.selectAll("input");
-buttons.on("change", function() {
-  console.log(this.value);
-});
-
 // -------- Choro map ---------- //
 
 var projection = d3.geoAlbersUsa();
@@ -40,6 +33,11 @@ var color = d3
     "#BEBEBE",
   ]);
 
+var renewColor = d3
+  .scaleOrdinal()
+  .domain(["None", "Voluntary", "RPS"])
+  .range(["#808080", "#ADFF2F", "#228B22"]);
+
 Promise.all([
   d3.json("data/states-10m.json"),
   d3.csv("data/choro-data-2019.csv"),
@@ -50,98 +48,145 @@ Promise.all([
 
 // Function to create maps
 function choroMap(us, data) {
-  // Draw the map
-  var path = d3.geoPath().projection(projection);
+  // Filling in the map
+  function fillMap(mapType) {
+    var tooltip = d3.select("#state-info").append("g");
 
-  var svg = d3
-    .select("#choro-map")
-    .append("svg")
-    .attr("viewBox", [0, 0, 1050, 500]);
+    d3.select("#choro-map")
+      .selectAll("svg")
+      .remove();
+    // Draw the map
+    var path = d3.geoPath().projection(projection);
 
-  // Legend - source: http://bl.ocks.org/palewire/d2906de347a160f38bc0b7ca57721328
-  var g = svg
-    .append("g")
-    .attr("class", "legendThreshold")
-    .attr("transform", "translate(900,20)");
-  g.append("text")
-    .attr("class", "caption")
-    .attr("x", 0)
-    .attr("y", -6)
-    .text("Energy Source");
-  var labels = sources;
-  var legend = d3_legend
-    .legendColor()
-    .labels(function(d) {
-      return labels[d.i];
-    })
-    .shapePadding(4)
-    .scale(color);
-  svg.select(".legendThreshold").call(legend);
+    var svg = d3
+      .select("#choro-map")
+      .append("svg")
+      .attr("viewBox", [0, 0, 1100, 500]);
 
-  // Rest of the map
-  svg
-    .append("g")
-    .selectAll("path")
-    .data(topojson.feature(us, us.objects.states).features)
-    .join("path")
-    .attr("class", "state")
-    .attr("fill", function(d, key) {
-      // setting the fill
-      const thRow = data.find(function(x) {
-        return Number(x.id) === Number(d.id);
-      });
-      if (thRow) {
-        return color(thRow.Top_Source);
-      }
-    })
-    .attr("d", d3.geoPath().projection(projection)) // draw each state
-    .attr("stroke", "white")
-    .attr("stroke-linejoin", "round")
-    .style("opacity", 0.85)
-    .attr("d", path);
+    // Legend - source: http://bl.ocks.org/palewire/d2906de347a160f38bc0b7ca57721328
+    var g = svg
+      .append("g")
+      .attr("class", "legendThreshold")
+      .attr("transform", "translate(900,20)");
+    g.append("text")
+      .attr("class", "caption")
+      .attr("x", 0)
+      .attr("y", -6)
+      .text("Energy Source");
+    var labels = sources;
+    var legend = d3_legend
+      .legendColor()
+      .labels(function(d) {
+        return labels[d.i];
+      })
+      .shapePadding(4)
+      .scale(color);
+    svg.select(".legendThreshold").call(legend);
 
-  var tooltip = d3.select("#state-chart").append("g");
-
-  // Create and customize tooltip - https://bl.ocks.org/duynguyen158/b96fa12ed5590b8435af799728e00a96
-  svg
-    .selectAll(".state")
-    .on("mouseout", function() {
-      d3.select(this)
-        .attr("stroke", "white")
-        .style("opacity", 0.85)
-        .lower();
-    })
-    .on("mouseover", function(d) {
-      d3.select(this)
-        .attr("stroke", "red")
-        .style("opacity", 1)
-        .raise();
-    })
-    .on("click", function(d) {
-      var state = d.target.__data__;
-      d3.select("#state-chart")
+    if (mapType === "policy") {
+      var g = svg
+        .append("g")
+        .attr("class", "policyLegend")
+        .attr("transform", "translate(800,425)");
+      g.append("text")
+        .attr("class", "caption")
+        .attr("x", 0)
+        .attr("y", -6)
+        .text("Renewable Energy Policy");
+      var labels = [
+        "No policy",
+        "Voluntary Targets",
+        "Renewable Portfolio Standard",
+      ];
+      var legend = d3_legend
+        .legendColor()
+        .labels(function(d) {
+          return labels[d.i];
+        })
+        .shapePadding(4)
+        .scale(renewColor);
+      svg.select(".policyLegend").call(legend);
+    }
+    if (mapType === "source") {
+      d3.select(".policyLegend")
         .selectAll("svg")
         .remove();
-      const thRow = data.find(function(x) {
-        return Number(x.id) === Number(state.id);
+    }
+    svg
+      .append("g")
+      .selectAll("path")
+      .data(topojson.feature(us, us.objects.states).features)
+      .join("path")
+      .attr("class", "state")
+      .attr("fill", function(d, key) {
+        // setting the fill
+        const thRow = data.find(function(x) {
+          return Number(x.id) === Number(d.id);
+        });
+        if (thRow && mapType === "source") {
+          return color(thRow.Top_Source);
+        }
+        if (thRow && mapType === "policy") {
+          return renewColor(thRow.Renew_Target);
+        }
+      })
+      .attr("d", d3.geoPath().projection(projection)) // draw each state
+      .attr("stroke", "white")
+      .attr("stroke-linejoin", "round")
+      .style("opacity", 0.85)
+      .attr("d", path);
+
+    // Create and customize tooltip - https://bl.ocks.org/duynguyen158/b96fa12ed5590b8435af799728e00a96
+    svg
+      .selectAll(".state")
+      .on("mouseout", function() {
+        d3.select(this)
+          .attr("stroke", "white")
+          .style("opacity", 0.85)
+          .lower();
+      })
+      .on("mouseover", function(d) {
+        d3.select(this)
+          .attr("stroke", "red")
+          .style("opacity", 1)
+          .raise();
+      })
+      .on("click", function(d) {
+        var state = d.target.__data__;
+        d3.select("#state-chart")
+          .selectAll("svg")
+          .remove();
+        d3.select("#state-info")
+          .selectAll("g")
+          .remove();
+        var tooltip = d3.select("#state-info").append("g");
+        const thRow = data.find(function(x) {
+          return Number(x.id) === Number(state.id);
+        });
+        if (thRow) {
+          selected = thRow.STATE;
+          stateTrend(selected);
+          tooltip.html(
+            "<h5><strong>" +
+              state.properties.name +
+              "</strong></h5><br><p>" +
+              "The primary energy source in " +
+              state.properties.name +
+              " is " +
+              thRow.Top_Source +
+              ". " +
+              thRow.Narration +
+              "</p>"
+          );
+        }
       });
-      if (thRow) {
-        selected = thRow.STATE;
-        stateTrend(selected);
-        tooltip.html(
-          "<h5><strong>" +
-            state.properties.name +
-            "</strong></h5><br><p>" +
-            "The primary energy source in " +
-            state.properties.name +
-            " is " +
-            thRow.Top_Source +
-            ". " +
-            thRow.Narration +
-            "</p>"
-        );
-      }
-    });
+  }
+  fillMap("source");
+  // toggle button!!
+  d3.selectAll("input").on("change", function change() {
+    var mapType = this.value;
+    fillMap(mapType);
+  });
 }
 
 // Stacked line for state energy sources

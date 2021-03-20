@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
 
     <!-- Bootstrap core JavaScript -->
     <link
@@ -10,7 +10,6 @@
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
     />
-
     <script src="bundle.js"></script>
 
     <title>U.S. Energy Generation &#9889;</title>
@@ -18,7 +17,7 @@
   <body>
     <link rel="stylesheet" href="src/main.css" />
     <div class="header-text">
-        <h2>Energy Generation by State</h2>
+        <h2>How the U.S. Generates Electricity &#9889;</h2>
         <p>In the U.S., energy generation is highly geographical and often depends on what resources are readily avaiable
           in a given region. The map below shows the dominant energy source for generation for each state in 2019. <br><br>
           For example, natural gas is the dominant source of electricity generation in the South and mid-Atlantic. 
@@ -30,12 +29,13 @@
     </div>
     <div class="row">
       <div class="map-col">
-        <h4>Predominant Energy Source in 2019</h4>
-        <p>Click on a state to see the energy generation trends!</p>
+        <h4>Energy Generation by State</h4>
+        <p>Toggle between map views & <br>
+          click on a state to see the energy generation trends!</p>
         <!-- Toggle-->
-        <div>
-          <input type="radio" name="type" value="source" checked="checked"> Predominant Energy Source<br>
-          <input type="radio" name="type" value="policy"> Renewable Energy Policy<br>
+        <div id="mapType">
+          <label><input type="radio" name="mapType" value="source" checked="checked"> Main Energy Source (2019)</label>
+          <label><input type="radio" name="mapType" value="policy"> Renewable Energy Policy</label>
         </div>
         <div
           id="choro-map"
