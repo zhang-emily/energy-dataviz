@@ -87,7 +87,7 @@ function choroMap(us, data) {
       var g = svg
         .append("g")
         .attr("class", "policyLegend")
-        .attr("transform", "translate(800,425)");
+        .attr("transform", "translate(800,430)");
       g.append("text")
         .attr("class", "caption")
         .attr("x", 0)
@@ -183,7 +183,9 @@ function choroMap(us, data) {
               "</p>"
           );
           policyTooltip.html(
-            "<p><strong>Goal: </strong>" + thRow.Goal + "</p>"
+            "<p><strong>Renewable Energy Target: </strong>" +
+              thRow.Goal +
+              "</p>"
           );
         }
       });
@@ -203,8 +205,8 @@ function choroMap(us, data) {
 function stateTrend(selected) {
   // set the dimensions and margins for state trend graph
   var margin = { top: 30, right: 30, bottom: 50, left: 60 };
-  var width = 350 - margin.left - margin.right;
-  var height = 250 - margin.top - margin.bottom;
+  var width = 400 - margin.left - margin.right;
+  var height = 300 - margin.top - margin.bottom;
 
   var startyear = 2000;
 
