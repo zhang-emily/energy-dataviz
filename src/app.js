@@ -159,7 +159,11 @@ function choroMap(us, data) {
         d3.select("#state-info")
           .selectAll("g")
           .remove();
+        d3.select("#policy-info")
+          .selectAll("g")
+          .remove();
         var tooltip = d3.select("#state-info").append("g");
+        var policyTooltip = d3.select("#policy-info").append("g");
         const thRow = data.find(function(x) {
           return Number(x.id) === Number(state.id);
         });
@@ -177,6 +181,9 @@ function choroMap(us, data) {
               ". " +
               thRow.Narration +
               "</p>"
+          );
+          policyTooltip.html(
+            "<p><strong>Goal: </strong>" + thRow.Goal + "</p>"
           );
         }
       });
